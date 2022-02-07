@@ -30,6 +30,12 @@
     <ClCompile Include="Struction.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="Two_Class_Objects.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Study_Problem_Ch03_2.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Car.h">
