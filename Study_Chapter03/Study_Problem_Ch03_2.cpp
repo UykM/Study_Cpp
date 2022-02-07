@@ -5,8 +5,8 @@ class Calculator
 {
 private:
 	int numOfAdd;			// 멤버변수를 여기서 초기화하는 것도 가능 / ex. int numOfAdd = 0;
-	int numOfMin;
-	int numOfMul;
+	int numOfMin;			// 혹은 생성자로 초기화
+	int numOfMul;			// 혹은 생성자에서 초기화 리스트로 초기화
 	int numOfDiv;
 public:
 	void init();
