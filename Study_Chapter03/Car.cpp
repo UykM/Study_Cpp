@@ -18,6 +18,19 @@ void Car::ShowCarState()
 	cout << "현재속도: " << curSpeed << "km/s" << endl << endl;
 }
 
+/* Inline Function 은 클래스(ex. Class Car)의 선언과 동일한 파일에 저장되어야 함. 
+
+Inline void Car::ShowCarState()
+{
+	...
+}
+
+멤버함수 ShowCarState 가 Inline Function 이라면,
+이러한 함수(ShowCarState) 몸체 부분은
+Class Car 가 선언된 헤더파일인 Car.h 에 저장되어야 함.
+
+*/ 
+
 void Car::Accel()
 {
 	if (fuelGauge <= 0)
