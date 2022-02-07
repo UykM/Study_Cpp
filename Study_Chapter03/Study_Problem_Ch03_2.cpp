@@ -4,7 +4,7 @@ using namespace std;
 class Calculator
 {
 private:
-	int numOfAdd;
+	int numOfAdd;			// 멤버변수를 여기서 초기화하는 것도 가능 / ex. int numOfAdd = 0;
 	int numOfMin;
 	int numOfMul;
 	int numOfDiv;
@@ -18,7 +18,7 @@ public:
 };
 
 
-void Calculator::init()
+void Calculator::init()			// 멤버변수 초기화 함수
 {
 	numOfAdd = 0;
 	numOfMin = 0;
