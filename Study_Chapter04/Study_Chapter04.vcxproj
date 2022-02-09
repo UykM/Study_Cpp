@@ -145,6 +145,7 @@
   <ItemGroup>
     <ClCompile Include="Point.cpp" />
     <ClCompile Include="Rectangle.cpp" />
+    <ClCompile Include="RectangleFaultFind.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

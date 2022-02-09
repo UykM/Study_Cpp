@@ -1,7 +1,7 @@
 #pragma once
 #include "Point.h"
 
-class Rectanle
+class Rectangle
 {
 private:
 	Point upLeft;
@@ -9,5 +9,5 @@ private:
 
 public:
 	bool InitMembers(const Point& ul, const Point& lr);
-	void ShowRecInfo() const;
+	void ShowRecInfo() const;			// const 선언된 함수
 };
