@@ -21,6 +21,12 @@
     <ClInclude Include="Rectangle.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="Point_Constructor.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Rectangle_Constructor.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Point.cpp">
@@ -39,6 +45,18 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="RectangleFaultFind.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Two_Class_Objects_and_Constructer.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Point_Constructor.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Rectangle_Constructor.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="RectangleConstructor.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
