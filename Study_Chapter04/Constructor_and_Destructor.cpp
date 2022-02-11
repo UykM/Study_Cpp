@@ -58,11 +58,3 @@ int main(void)
 
 	return 0;
 }
-
-
-Simple()
-{
-	cout << "..." << endl;
-}
-
-Simple* ptr = new Simple;
