@@ -20,7 +20,7 @@ int main(void)
 }
 
 /*
-int& RefRetFuncOne(int& ref)			// 참조형으로 반환
+int& RefRetFuncOne(int& ref)			// 참조형으로 반환 
 {										// int &ref = num1;	- 인자의 전달과정에서 일어난 일
 	ref++;
 	return ref;
@@ -32,7 +32,7 @@ int main(void)
 	int num2 = RefRetFuncOne(num1);      // 하지만, 참조자가 아닌 일반변수 num2를 선언해서 반환값을 저장
 										 // int num2 = ref; - 함수의 반환과 반환 값의 저장에서 일어나는 일
 
-										 num1++;
+	num1++;
 	num2+=100;                           // num1 과 num2 는 다른 변수
 	cout << "num1: " << num1 << endl;
 	cout << "num2: " << num2 << endl;
@@ -40,8 +40,8 @@ int main(void)
 }
 */
 
-// 위에 두 개의 예제처럼, 반환형이 참조형인 경우, 반환 값을 무엇으로 저장하느냐에 따라서 다른 결과가 나타남.
-
+// 위에 두 개의 예제처럼, 반환형이 참조형인 경우, 반환 값을 2가지의 형태로 반환값 저장 가능.
+// 즉, 무엇으로 저장하느냐에 따라서 다른 결과가 나타남.
 
 /*
 int RefRetFuncTwo(int& ref)				// 기본자료형으로 반환

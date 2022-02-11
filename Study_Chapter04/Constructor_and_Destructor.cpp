@@ -1,4 +1,6 @@
 #include <iostream>
+#include <cstring>
+#pragma warning(disable:4996)
 using namespace std;
 
 class SimpleClass
@@ -46,6 +48,8 @@ public:		// 생성자의 오버로딩이 가능하다.
 	}
 };
 
+
+
 int main(void)
 {
 	SimpleClass sc1;
@@ -59,3 +63,56 @@ int main(void)
 
 	return 0;
 }
+
+/* 소멸자(Destructor) : 디폴트 생성자(Default Constructor)와 마찬가지로, 직접 소멸자를 정의하지 않으면 자동으로 삽입됨.
+
+class AAA
+{
+	// empty class
+}
+
+class AAA
+{
+public:
+	AAA() {}
+	~AAA() {}
+};
+
+위의 두 클래스 정의는 동일함.
+이러한 소멸자(Destructor)는 대개 생성자에서 할당한 리소스의 소멸에 사용됨.
+예를 들어 new 연산자를 이용해서 할당해 놓은 메모리 공간이 있다면,
+소멸자에서는 delet 연산자를 이용해서 이 메모리 공간을 소멸함.
+
+class Person
+{
+private:
+	char * name;
+	int age;
+public:
+	Person(char * myname, int myage)
+	{
+		int len = strlen(myname) + 1;
+		name = new char[len];
+		strcpy(name, myname);
+		age = myage;
+	}
+	void ShowPersonInfo() const
+	{
+		cout << "이름: " << name << endl;
+		cout << "나이: " << age << endl;
+	}
+	~Person()
+	{
+		delete []name;
+		cout << "called destructor!" << endl;
+	}
+};
+
+int main(void)
+{
+	Person man1("신 민 규", 22);
+	man1.ShowPersonInfo();
+
+	return 0;
+}
+*/

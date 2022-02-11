@@ -4,13 +4,14 @@ using namespace std;
 class FruitSeller
 {
 private:
-	int APPLE_PRICE;
-	int numOfApples;
+	// int APPLE_PRICE;
+	const int APPLE_PRICE;		// const 변수는 선언과 동시에 초기화해야 했기 때문에,
+	int numOfApples;			// Initializer (선언과 동시에 초기화 가능)를 이용하면 const로 선언 가능.
 	int myMoney;
 
 public:
 	/*
-	void IniMembers(int price, int num, int money)
+	FruitSeller(int price, int num, int money)
 	{
 		APPLE_PRICE = price;
 		numOfApples = num;
@@ -18,10 +19,8 @@ public:
 	}
 	*/
 	FruitSeller(int price, int num, int money)
+		: APPLE_PRICE(price), numOfApples(num), myMoney(money)	// 선언과 동시에 초기화
 	{
-		APPLE_PRICE = price;
-		numOfApples = num;
-		myMoney = money;
 	}
 
 	int SaleApples(int money)
@@ -32,7 +31,7 @@ public:
 		return num;
 	}
 
-	void ShowSalesResult() const // const : 안전성을 높임
+	void ShowSalesResult() const
 	{
 		cout << "남은 사과: " << numOfApples << endl;
 		cout << "판매 수익: " << myMoney << endl << endl;
@@ -46,16 +45,15 @@ class FruitBuyer
 
 public:
 	/*
-	void InitMembers(int money)
+	FruitBuyer(int money)
 	{
 		myMoney = money;
 		numOfApples = 0;
 	}
 	*/
 	FruitBuyer(int money)
+		: myMoney(money), numOfApples(0)
 	{
-		myMoney = money;
-		numOfApples = 0;
 	}
 
 	void BuyApples(FruitSeller& seller, int money)
@@ -64,7 +62,7 @@ public:
 		myMoney -= money;
 	}
 
-	void ShowBuyResult() const // const : 안전성을 높임
+	void ShowBuyResult() const
 	{
 		cout << "현재 잔액: " << myMoney << endl;
 		cout << "사과 개수: " << numOfApples << endl << endl;
