@@ -8,6 +8,22 @@
 // 앞서 할당한 int형 배열의 소멸	: delet []arr1;
 // 앞서 할당한 double형 배열의 소멸 : delet []arr2;
 
+/* new 는 메모리 할당뿐만 아니라, 생성자를 호출하고 객체까지 생성
+Class Simple
+{
+public:
+	Simple()		// 생성자 - 멤버함수의 일종
+	{
+		cout << "..." << endl;
+	}
+};
+
+int main(void)
+{
+	Simple * sp1 = new Simple;		// Simple * sp1 = new Simple();
+}									- 생성자에 전달받을 인자가 없기 때문에 소괄호 생략 가능.
+*/
+
 #include <iostream>
 #include <cstring>
 #pragma warning(disable:4996) // C4996에러를 무시
@@ -15,7 +31,7 @@ using namespace std;
 
 char* MakeStrAdr(int len)
 {
-	char* str = new char[len];
+	char* str = new char[len];		
 	return str;
 }
 

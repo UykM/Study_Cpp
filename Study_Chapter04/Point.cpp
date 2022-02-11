@@ -7,7 +7,7 @@ bool Point::InitMembers(int xpos, int ypos)
 	if (xpos < 0 || ypos < 0)
 	{
 		cout << "벗어난 범위의 값 전달" << endl;
-		return false;
+		return false;			// if문에 거릴는 경우 false를 반환하고 함수 종료
 	}
 
 	x = xpos;
