@@ -46,7 +46,9 @@ public:
 
 int main(void)
 {
-	Person parr[3];			// 저장의 대상이 객체
+	Person parr[3];			// 선언과 함께 기본 생성자(Default Constructor) 호출
+							// ClassName Object[n];  -  기본 생성자 n번 호출
+							// 저장의 대상이 객체
 	char namestr[100];
 	char* strptr;
 	int age;
@@ -57,9 +59,9 @@ int main(void)
 		cin >> namestr;
 		cout << "나이: ";
 		cin >> age;
-		strptr = new char[strlen(namestr) + 1];		// 생성자가 호출됨.
+		strptr = new char[strlen(namestr) + 1];		
 		strcpy(strptr, namestr);
-		parr[i].SetPersonInfo(strptr, age);
+		parr[i].SetPersonInfo(strptr, age);		// 생성자가 호출됨.
 	}
 	parr[0].ShowPersonInfo();
 	parr[1].ShowPersonInfo();
