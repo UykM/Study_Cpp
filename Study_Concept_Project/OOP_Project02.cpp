@@ -11,13 +11,9 @@ void ShowAccount();
 
 const int Name_Lens = 20;             // 입력할 이름의 최대 길이 
 
-enum             // enum 열거형이름 { 값1, 값2, .. };  ->  가독성을 높혀줌 / 열거형이름 생략가능 !
+enum 
 {
-	Make = 1,
-	DEPOSIT,
-	WITHDRAW,
-	INFORM,
-	EXIT
+	Make = 1, DEPOSIT, WITHDRAW, INFORM, EXIT
 };
 
 class Account
@@ -27,31 +23,31 @@ private:
 	int money;		// 잔액
 	char* cusName;	// 고객 이름
 public:
-	Account(int _accID, int _money, const char* _cusName)
+	Account(int _accID, int _money, char* _cusName)
 		: accID(_accID), money(_money)
 	{
 		cusName = new char[strlen(_cusName) + 1];
 		strcpy(cusName, _cusName);
 	}
 
-	int GetAccID()
+	int GetAccID(void)
 	{
 		return accID;
 	}
 
-	void Deposit(int _money)
+	int GetMoney(void)
 	{
-		money += _money;
+		return money;
 	}
 
-	int Withdraw(int _money)		// 출금액 반환, 잔액 부족 시 0 반환
+	void SetAccID(int accID)
 	{
-		if (money < _money)
-		{
-			return 0;
+		this->accID = accID;
+	}
 
-		}
-		money -= _money;
+	void SetMoney(int money)
+	{
+		this->money = money;
 	}
 
 	void ShowAccInfo()
@@ -66,7 +62,7 @@ public:
 	}
 };
 
-Account* accArr[100];
+Account* accArr[100];	// 객체 포인터 배열
 int accNum = 0;		// 저장된 account의 수
 
 int main(void)
@@ -119,38 +115,38 @@ void Menu(void)
 
 void MakeAccount(void)
 {
-	int _accID;
-	char _cusName[Name_Lens];
-	int _money;
+	int ID;
+	char cusName[Name_Lens];
+	int money;
 	cout << "[계좌개설]" << endl;
 	cout << "계좌ID: ";
-	cin >> _accID;
+	cin >> ID;
 	cout << "이 름: ";
-	cin >> _cusName;
+	cin >> cusName;
 	cout << "입금액: ";
-	cin >> _money;
+	cin >> money;
 	cout << '\n';
 
-	accArr[accNum++] = new Account(_accID, _money, _cusName);
+	accArr[accNum] = new Account(ID, money, cusName);
+	accNum++;
 }
 
 void DepositMoney(void)
 {
-	int yourID;
+	int ID;
 	int plusMoney = 0;
-	int n = 0;
 
 	cout << "[입   금]" << endl;
 	cout << "계좌ID: ";
-	cin >> yourID;
+	cin >> ID;
 	cout << "입금액: ";
 	cin >> plusMoney;
 
 	for (int i = 0; i < accNum; i++)
 	{
-		if (accArr[i]->GetAccID() == yourID)
+		if (accArr[i]->GetAccID() == ID)
 		{
-			accArr[i]->Deposit(plusMoney);
+			accArr[i]->SetMoney(accArr[i]->GetMoney() + plusMoney);
 			cout << "입금 완료" << '\n' << endl;
 			return;
 		}
@@ -173,14 +169,16 @@ void WithdrawMoney(void)
 	{
 		if (accArr[i]->GetAccID() == myID)
 		{
-			if (accArr[i]->Withdraw(minusMoney) == 0)
+			if (accArr[i]->GetMoney() < minusMoney)
 			{
 				cout << "잔액 부족" << '\n' << endl;
+				return;
 			}
-				cout << "출금 완료" << '\n' << endl;
+			accArr[i]->SetMoney(accArr[i]->GetMoney() - minusMoney);
+			cout << "출금 완료" << '\n' << endl;
 		}
 		cout << "존재하지 않는 계좌입니다." << '\n' << endl;
-		}
+	}
 }
 
 void ShowAccount(void)
@@ -189,5 +187,10 @@ void ShowAccount(void)
 	{
 		accArr[i]->ShowAccInfo();
 		cout << endl;
+	}
+
+	if (accNum == 0) 
+	{
+		cout << "저장된 계좌 정보가 없습니다." << "\n" << endl;
 	}
 }
