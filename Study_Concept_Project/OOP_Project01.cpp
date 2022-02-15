@@ -54,8 +54,6 @@ int main()
 
 void Menu(void)
 {
-	string choice;
-
 	cout << "-----Menu------" << endl;
 	cout << "1. 계좌개설" << endl;
 	cout << "2. 입금" << endl;
