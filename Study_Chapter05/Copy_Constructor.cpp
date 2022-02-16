@@ -144,7 +144,7 @@ ex) class SoSimple
 		}
 	};
 
-	void SimpleFuncObj(SoSimple ob)			// main 함수에서 인자(obj 객체)를 전달 받음
+	void SimpleFuncObj(SoSimple ob)			// main 함수에서 인자(obj 객체)를 전달 받음, 값을 전달 받았기 때문에 Call-by-value 방식
 	{
 		ob.ShowData();
 	}
@@ -187,13 +187,14 @@ ex) class SoSimple
 	SoSimple SimpleFuncObj(SoSimple ob)
 	{
 		cout << "return 이전" << endl;
-		return ob;
+		return ob;							// 반환형이 참조형( Simple &SimpleFunObj(SoSimple ob) )이 아니므로 ob 객체의 복사본(임시객체)이 만들어지면서 반환이 진행
 	}
 
 	int main(void)
 	{
-		SoSimple obj(7);
-		SimpleFuncObj(obj).AddNum(30).ShowData();		// SimpleFuncObj 로 obj 객체를 인자로 전달 - ob의 복사 생성자 호출
+		SoSimple obj(7);		
+		SimpleFuncObj(obj).AddNum(30).ShowData();		// SimpleFunObj(obj) -> 첫 번째 복사 생성자 호출 : SimpleFuncObj(SoSimple ob) 로 obj 객체를 인자로 전달 - ob 객체의 복사 생성자 호출
+														// return ob;        -> 두 번째 복사 생성자 호출 : ob 객체를 반환하게 되면, '임시객체'라는 것이 생성되고, 이 임시객체를 대상으로 AddNum 함수, ShowData 함수 호출
 		obj.ShowData();
 		return 0;
 	}
@@ -204,4 +205,121 @@ return 이전
 Called SoSimple(const So Simple& copy)
 num: 37
 num: 7
+*/
+
+
+/* 임시객체
+* 다음 행으로 넘어가면 바로 소멸
+* 참조자에 참조되는 임시객체는 바로 소멸 X
+
+#include <iostream>
+using namespace std;
+
+class Temporary
+{
+private:
+	int num;
+public:
+	Temporary(int n) : num(n)
+	{
+		cout << "create objL " << num << endl;
+	}
+	~Temporary()
+	{
+		cout << "destroy objL " << num << endl;
+	}
+	void ShowTempInfo()
+	{
+		cout << "My num is " << num << endl;
+	}
+};
+
+int main(void)
+{
+	Temporary(100);										// 100으로 초기화된 Temporary 임시객체 생성
+														// Temporary temp(100); 인 경우엔 임시객체 생성 X
+	cout << "********** after make!" << endl << endl;
+
+	Temporary(200).ShowTempInfo();						// 
+	cout << "********** after make!" << endl << endl;
+
+	const Temporary& ref = Temporary(300);
+	cout << "********** end of main!" << endl << endl;
+	return 0;
+}
+
+실행결과
+create obj: 100
+destroy obj: 100
+********** after make!
+
+create obj: 200
+My num is 200
+destroy obj: 200
+********** after make!
+
+create obj: 300
+********** end of main!
+
+ destroy obj: 300
+*/
+
+/* 객체의 생성과 소멸 이해
+ 
+#include <iostrema>
+using namespace std;
+
+class SoSimple
+{
+private:
+	int num;
+public:
+	SoSimple(int n) : num(n)
+	{
+		cout << "New Object: " << this << endl;
+	}
+	SoSimple(const SoSimple& copy) : num(copy.num)
+	{
+		cout << "New Copy obj: " << this << endl;
+	}
+	~SoSimple()
+	{
+		cout << "Destroy obj: " << this << endl;
+	}
+};
+
+SoSimple SimpleFuncObj(SoSimple ob)			// main 함수에서 obj 객체를 인자(매개변수 ob) 로 전달받음.
+{											// Case 2: Call-by-value 방식의 함수호출 과정에서 객체를 인자로 전달하는 경우, 복사 생성자( SoSimple(const SoSimple& copy) ) 호출
+	cout << "Parm ADR: " << &ob << endl;
+	return ob;								// ob 객체의 값 자체 반환
+											// Case 3 : ob 객체의 값 자체을 반환하기 때문에, 임시객체가 생성된 후, 복사 생성자( SoSimple(const SoSimple& copy) )  호출
+}
+
+int main(void)
+{
+	SoSimple obj(7);
+	Simple FuncObj(obj);
+
+	cout << endl;
+	SoSimple tempRef = SimpleFuncObj(obj);	// 반환되는 임시객체에 tempRef 라는 이름을 할당하고 있음. - temRef 라는 새로운 객체를 생성한 것이 아님!
+	cout << "Return Obj " << &tempRef << endl;
+	return 0;
+}
+
+
+실행결과
+New Object: 주소 A				// SoSimple obj(7);에 의해서 obj 객체 생성 
+New Copy obj: 주소 B			// Simple FuncObj(obj); 함수호출로 인한 매개변수 ob 의  생성
+Parm ADR: 주소 B				// 생성된 매개변수 ob(객체) 의 주소 출력
+New Copy obj: 주소 C			// -> 임시객체의 주소 / return ob; 를 보면 ob 객체의 값 자체을 반환하기 때문에, 임시객체가 생성된 후, 복사 생성자( SoSimple(const SoSimple& copy) )  호출
+Destroy obj: 주소 B				// 매개변수 ob의 소멸
+Destroy obj: 주소 C				// 임시객체의 소멸
+
+New Copy obj; 주소 B			// Simple FuncObj(obj); 함수호출로 인한 매개변수 ob 의 생성
+Parm ADR: 주소 B				// 생성된 매개변수 ob(객체) 의 주소 출력
+New Copy obj: 주소 C			// -> 임시객체의 주소 / return ob; 를 보면 ob 객체의 값 자체을 반환하기 때문에, 임시객체가 생성된 후, 복사 생성자( SoSimple(const SoSimple& copy) )  호출
+Destroy ofj: 주소 B				// 매개변수 ob의 소멸
+Return Obj	주소 C				// temRef 가 임시객체를 참조하기 때문에 같은 주소	/	참조자에 의해 참조되는 임시객체는 즉시 소멸 X
+Destroy obj: 주소 C				// temRef가 참조하는 임시객체 소멸
+Destroy obj: 주소 A				// 마지막으로 남겨진 obj 객체 소멸
 */
