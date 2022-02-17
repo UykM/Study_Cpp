@@ -35,6 +35,24 @@ public:
 		return accID;
 	}
 
+	void Deposit(int _money)
+	{
+		money += money;
+	}
+
+	int Withdraw(int _money)
+	{
+		if (money < _money)
+		{
+			return 0;
+		}
+
+		money -= _money;
+		return money;
+	}
+
+	/* this 활용
+
 	int GetMoney(void)
 	{
 		return money;
@@ -49,6 +67,7 @@ public:
 	{
 		this->money = money;
 	}
+	*/
 
 	void ShowAccInfo()
 	{
@@ -146,12 +165,24 @@ void DepositMoney(void)
 	{
 		if (accArr[i]->GetAccID() == ID)
 		{
+			accArr[i]->Deposit(plusMoney);
+			cout << "입금 완료" << '\n' << endl;
+			return;
+		}
+		cout << "존재하지 않는 계좌입니다." << '\n' << endl;
+	}
+	/* this 활용
+	for (int i = 0; i < accNum; i++)
+	{
+		if (accArr[i]->GetAccID() == ID)
+		{
 			accArr[i]->SetMoney(accArr[i]->GetMoney() + plusMoney);
 			cout << "입금 완료" << '\n' << endl;
 			return;
 		}
 		cout << "존재하지 않는 계좌입니다." << '\n' << endl;
 	}
+	*/
 }
 
 void WithdrawMoney(void)
@@ -164,7 +195,20 @@ void WithdrawMoney(void)
 	cin >> myID;
 	cout << "입금액: ";
 	cin >> minusMoney;
-
+	
+	for (int i = 0; i < accNum; i++)
+	{
+		if (accArr[i]->GetAccID() == myID)
+		{
+			if (accArr[i]->Withdraw(minusMoney) == 0)
+			{
+				cout << "잔액 부족" << '\n' << endl;
+				return;
+			}
+			cout << "출금 완료" << '\n' << endl;
+		}
+	}
+	/* this 활용
 	for(int i = 0; i < accNum; i++)
 	{
 		if (accArr[i]->GetAccID() == myID)
@@ -177,8 +221,9 @@ void WithdrawMoney(void)
 			accArr[i]->SetMoney(accArr[i]->GetMoney() - minusMoney);
 			cout << "출금 완료" << '\n' << endl;
 		}
-		cout << "존재하지 않는 계좌입니다." << '\n' << endl;
 	}
+	*/
+	cout << "존재하지 않는 계좌입니다." << '\n' << endl;
 }
 
 void ShowAccount(void)
