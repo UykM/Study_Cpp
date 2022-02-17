@@ -176,7 +176,6 @@ void DepositMoney(void)
 			cout << "입금 완료" << '\n' << endl;
 			return;
 		}
-		cout << "존재하지 않는 계좌입니다." << '\n' << endl;
 	}
 	/* this 활용
 	for (int i = 0; i < accNum; i++)
@@ -186,10 +185,10 @@ void DepositMoney(void)
 			accArr[i]->SetMoney(accArr[i]->GetMoney() + plusMoney);
 			cout << "입금 완료" << '\n' << endl;
 			return;
-		}
-		cout << "존재하지 않는 계좌입니다." << '\n' << endl;
+		}	
 	}
 	*/
+	cout << "존재하지 않는 계좌입니다." << '\n' << endl;
 }
 
 void WithdrawMoney(void)
