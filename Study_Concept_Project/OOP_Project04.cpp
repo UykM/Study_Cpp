@@ -1,4 +1,5 @@
-// 추가된 내용(Supplementary Contents) - Account 클래스에 복사 생성자 추가
+// 추가된 내용(Supplementary Contents) - Accunt 클래스의 멤버함수에 const 선언
+// const 선언을 추가함으로써 코드의 안정성을 높임.
 
 #include <iostream>
 #include <cstring>
@@ -78,7 +79,7 @@ public:
 	}
 	*/
 
-	void ShowAccInfo()
+	void ShowAccInfo() const			// 멤버함수을 const로 선언해줌으로써 코드의 안정성을 높임
 	{
 		cout << "계좌ID: " << accID << endl;
 		cout << "이 름: " << cusName << endl;
@@ -187,7 +188,7 @@ void DepositMoney(void)
 			accArr[i]->SetMoney(accArr[i]->GetMoney() + plusMoney);
 			cout << "입금 완료" << '\n' << endl;
 			return;
-		}	
+		}
 	}
 	*/
 	cout << "존재하지 않는 계좌입니다." << '\n' << endl;
