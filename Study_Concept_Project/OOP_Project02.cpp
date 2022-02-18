@@ -1,4 +1,7 @@
- #include <iostream>
+// 추가된 내용(Supplementary Contents) - Account 클래스 정의(캡슐화), 객체 포인터 배열 적용 , (+ this 포인터 활용)
+// 
+
+#include <iostream>
 #include <cstring>
 #pragma warning(disable:4996)
 using namespace std;
