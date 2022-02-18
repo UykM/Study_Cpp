@@ -1,3 +1,5 @@
+// Chapter02 의 const 내용 보충
+
 // 변수를 상수화 하는 const
 // const int num = 10;
 
