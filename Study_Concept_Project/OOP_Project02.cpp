@@ -195,7 +195,7 @@ void WithdrawMoney(void)
 	cout << "[출   금]" << endl;
 	cout << "계좌ID: ";
 	cin >> myID;
-	cout << "입금액: ";
+	cout << "출금액: ";
 	cin >> minusMoney;
 	
 	for (int i = 0; i < accNum; i++)

@@ -33,7 +33,7 @@ public:
 		strcpy(cusName, _cusName);
 	}
 
-	Account(const Account& ref)						// OOP_Project02 에서 이 부분만 추가 - 깊은 복사를 원칙으로 정했을 때 추가한 복사 생성자
+	Account(const Account& ref)
 		: accID(ref.accID), money(ref.money)
 	{
 		cusName = new char[strlen(ref.cusName) + 1];
@@ -202,7 +202,7 @@ void WithdrawMoney(void)
 	cout << "[출   금]" << endl;
 	cout << "계좌ID: ";
 	cin >> myID;
-	cout << "입금액: ";
+	cout << "출금액: ";
 	cin >> minusMoney;
 
 	for (int i = 0; i < accNum; i++)
