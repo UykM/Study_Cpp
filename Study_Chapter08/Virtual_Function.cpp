@@ -280,7 +280,7 @@ int main(void)
 
 	// 임시직 등록
 	TemporaryWorker* alba = new TemporaryWorker("JUN", 700);
-	alba->AddWorkTime(5);
+	alba->AddWorkTime(5);		// 5시간 일한 결과 등록
 	handler.AddEmployee(alba);
 
 	// 영업직 등록
