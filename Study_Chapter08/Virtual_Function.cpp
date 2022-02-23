@@ -105,7 +105,7 @@ class First
 {
 public:
 	virtual void MyFunc() { cout << "FirstFunc" << endl; };		// 이렇게 virtual 선언을 해주면, 
-};																// 해당 함수호출 시, 포인터 변수가 실제로 가리키는 객체를 참조하여 호출의 대상을 결정
+};																// 해당 함수호출 시, 포인터 변수가 실제로 '가리키는 객체'를 참조하여 호출의 대상을 결정
 																// 이 가상함수를 오버라이딩 하는 함수도 가상함수가 됨.
 
 class Second: public First
@@ -236,7 +236,10 @@ public:
 class EmployeeHandler		
 {
 private:
-	Employee* empList[50];	
+	Employee* empList[50];	// 핵심! - 객체 포인터 배열
+							// Employee 객체의 주소 값을 저장하는 방식으로 객체를 저장!
+							// Employee형 객체 포인터 배열은 Employee를 직접 혹은 간접적으로 상속하는 모든 객체를 가리킬 수 있음. (객체의 주소 값을 저장할 수 있음)
+							// 따라서 Employee 클래스를 상속받는 클래스(PermanentWorker, TemporaryWorker, SalesWorker)의 객체도 이 배열에 함께 저장 가능
 	int empNum;
 public:
 	EmployeeHandler() : empNum(0)
@@ -249,7 +252,7 @@ public:
 	{
 		for (int i = 0; i < empNum; i++)
 		{
-			empList[i] -> ShowSalaryInfo();		// ShowSalaryInfo 함수는 가상함수이므로 가장 마지막에 오버라이딩을 진행한 함수가 호출
+			empList[i]->ShowSalaryInfo();		// empList[i]에 저장된 각각의 객체가 가르키는 클래스의 가상함수(ShowSalaryInfo)를 호출
 		}
 	}
 	void ShowTotalSalary() const
@@ -257,7 +260,7 @@ public:
 		int sum = 0;
 		for (int i = 0; i < empNum; i++)
 		{
-			sum += empList[i]->GetPay();		// GetPay 함수는 가상함수이므로 가장 마지막에 오버라이딩을 진행한 함수가 호출
+			sum += empList[i]->GetPay();		// empList[i]에 저장된 각각의 객체가 가르키는 클래스의 가상함수(GetPay)를 호출
 		}
 		cout << "salary sum: " << sum << endl;
 	}
