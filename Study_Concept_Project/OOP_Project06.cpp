@@ -8,10 +8,14 @@ using namespace std;
 
 const int Name_Lens = 20;             // 입력할 이름의 최대 길이 
 
-enum
-{
-	Make = 1, DEPOSIT, WITHDRAW, INFORM, EXIT
-};
+// 프로그램 사용자의 선택 메뉴
+enum {Make = 1, DEPOSIT, WITHDRAW, INFORM, EXIT};
+
+// 신용등급
+enum {LEVEL_A = 7, LEVEL_B  = 4, LEVEL_C = 2};
+
+// 계좌의 종류
+enum {NORMAL = 1, CREDIT = 2};
 
 class Account
 {
@@ -24,7 +28,7 @@ public:
 	Account(const Account& ref);
 
 	int GetAccID() const;
-	void Deposit(int _money);
+	virtual void Deposit(int _money);		// 유도 클래스인 NormalAccount, CreditClass 에서 호출하기 때문에, 가상함수 선언 필요
 	int Withdraw(int _money);
 	void ShowAccInfo() const;
 	~Account();
@@ -51,7 +55,7 @@ int Account::GetAccID() const
 
 void Account::Deposit(int _money)
 {
-	money += money;
+	money += _money;
 }
 
 int Account::Withdraw(int _money)
@@ -76,6 +80,42 @@ Account::~Account()
 {
 	delete[]cusName;
 }
+
+// 입금 시에 이자가 원금에 더해지는 것으로 간주하여 코드 작성함.
+
+// 보통예금계좌
+class NormalAccount : public Account
+{
+private:
+	int interRate;	// 이자율 %단위
+public:
+	NormalAccount(int ID, int money, const char* cusName, int rate)
+		: Account(ID, money, cusName), interRate(rate)
+	{ }
+
+	virtual void Deposit(int money)
+	{
+		Account::Deposit(money);	// 원금추가
+		Account::Deposit(money * (interRate / 100.0));		// 이자추가
+	}
+};
+
+// 신용신뢰계좌
+class CreditAccount : public Account
+{
+private:
+	int specialRate;
+public:
+	CreditAccount(int ID, int money, const char* cusName, int rate, int special)
+		: NormalAccount(ID, money, cusName, rate), specialRate(special)
+	{ }
+
+	virtual void Deposit(int money)
+	{
+		NormalAccount::Deposit(money);		// 원금과 이자추가
+		Account::Deposit(money * (specialRate / 100.0));		// 특별이자추가
+	}
+};
 
 class AccountHandler	// 컨트롤 클래스
 {
@@ -105,20 +145,58 @@ void AccountHandler::Menu(void) const
 
 void AccountHandler::MakeAccount(void)
 {
+	int sel;
+	cout << "[계좌종류선택]" << endl;
+	cout << "1.보통예금계좌 2.신용신뢰계좌" << endl;
+	cout << "선택: ";
+	cin >> sel;
+	
+	if (sel == NORMAL) MakeNormalAccount();
+	else MakeCreditAccount();
+}
+
+void AccountHandler::MakeNormalAccount();
+{
 	int ID;
-	char cusName[Name_Lens];
+	char name[Name_Lens];
 	int money;
-	cout << "[계좌개설]" << endl;
-	cout << "계좌ID: ";
-	cin >> ID;
-	cout << "이 름: ";
-	cin >> cusName;
-	cout << "입금액: ";
-	cin >> money;
+	int interRate;
+	
+	cout << "[보통예금계좌 개설]" << endl;
+	cout << "계좌ID: "; cin >> ID;
+	cout << "이 름: "; cin >> cusName;
+	cout << "입금액: "; cin >> money;
+	cout << "이자율: "; cin >> interRate;
 	cout << '\n';
 
-	accArr[accNum] = new Account(ID, money, cusName);
-	accNum++;
+	accArr[accNum++] = new NormalAccount(ID, money, cusName, interRate);
+}
+
+void AccountHandler::MakeCreditAccount();
+{
+	int ID;
+	char name[Name_Lens];
+	int money;
+	int interRate;
+	int creditLevel;
+
+	cout << "[보통예금계좌 개설]" << endl;
+	cout << "계좌ID: "; cin >> ID;
+	cout << "이 름: "; cin >> cusName;
+	cout << "입금액: "; cin >> money;
+	cout << "이자율: "; cin >> interRate;
+	cout << "신용등급(1toA, 2toB, 3toC): "; cin >> creditLevel;
+	cout << '\n';
+
+	switch (creditLevel)
+	{
+	case 1:
+		accArr[accNum++] = new CreditAccount(ID, cusName, money, interRate, LEVEL_A);
+	case 2:
+		accArr[accNum++] = new CreditAccount(ID, cusName, money, interRate, LEVEL_B);
+	case 3:
+		accArr[accNum++] = new CreditAccount(ID, cusName, money, interRate, LEVEL_C);
+	}
 }
 
 void AccountHandler::DepositMoney(void)

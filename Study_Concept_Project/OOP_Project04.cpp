@@ -47,7 +47,7 @@ public:
 
 	void Deposit(int _money)
 	{
-		money += money;
+		money += _money;
 	}
 
 	int Withdraw(int _money)

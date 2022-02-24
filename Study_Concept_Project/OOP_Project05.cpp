@@ -52,7 +52,7 @@ int Account::GetAccID() const
 
 void Account::Deposit(int _money)
 {
-	money += money;
+	money += _money;
 }
 
 int Account::Withdraw(int _money)
