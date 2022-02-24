@@ -1,6 +1,5 @@
 // 추가된 내용(Supplementary Contents)
-// AccountHandler 라는 이름의 컨트롤 클래스 정의
-// 클래스 내에서는 멤버함수의 선언만 두고, 정의는 클래스 외부로 빼 내어 가독성을 높임.
+// NormalAccount 클래스와 HighCreditAccount 클래스 추가로 정의
 
 #include <iostream>
 #include <cstring>
