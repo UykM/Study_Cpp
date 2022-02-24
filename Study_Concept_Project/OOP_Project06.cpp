@@ -89,7 +89,7 @@ class NormalAccount : public Account
 private:
 	int interRate;	// 이자율 %단위
 public:
-	NormalAccount(int ID, int money, const char* cusName, int rate)
+	NormalAccount(int ID, int money, char* cusName, int rate)
 		: Account(ID, money, cusName), interRate(rate)
 	{ }
 
@@ -101,12 +101,12 @@ public:
 };
 
 // 신용신뢰계좌
-class CreditAccount : public Account
+class CreditAccount : public NormalAccount
 {
 private:
 	int specialRate;
 public:
-	CreditAccount(int ID, int money, const char* cusName, int rate, int special)
+	CreditAccount(int ID, int money, char* cusName, int rate, int special)
 		: NormalAccount(ID, money, cusName, rate), specialRate(special)
 	{ }
 
@@ -130,6 +130,9 @@ public:
 	void WithdrawMoney(void);
 	void ShowAccount(void) const;
 	~AccountHandler();
+protected:
+	void MakeNormalAccount(void);
+	void MakeCreditAccount(void);
 };
 
 void AccountHandler::Menu(void) const
@@ -155,10 +158,10 @@ void AccountHandler::MakeAccount(void)
 	else MakeCreditAccount();
 }
 
-void AccountHandler::MakeNormalAccount();
+void AccountHandler::MakeNormalAccount()
 {
 	int ID;
-	char name[Name_Lens];
+	char cusName[Name_Lens];
 	int money;
 	int interRate;
 	
@@ -172,10 +175,10 @@ void AccountHandler::MakeNormalAccount();
 	accArr[accNum++] = new NormalAccount(ID, money, cusName, interRate);
 }
 
-void AccountHandler::MakeCreditAccount();
+void AccountHandler::MakeCreditAccount()
 {
 	int ID;
-	char name[Name_Lens];
+	char cusName[Name_Lens];
 	int money;
 	int interRate;
 	int creditLevel;
@@ -191,11 +194,14 @@ void AccountHandler::MakeCreditAccount();
 	switch (creditLevel)
 	{
 	case 1:
-		accArr[accNum++] = new CreditAccount(ID, cusName, money, interRate, LEVEL_A);
+		accArr[accNum++] = new CreditAccount(ID, money, cusName, interRate, LEVEL_A);
+		break;
 	case 2:
-		accArr[accNum++] = new CreditAccount(ID, cusName, money, interRate, LEVEL_B);
+		accArr[accNum++] = new CreditAccount(ID, money, cusName, interRate, LEVEL_B);
+		break;
 	case 3:
-		accArr[accNum++] = new CreditAccount(ID, cusName, money, interRate, LEVEL_C);
+		accArr[accNum++] = new CreditAccount(ID, money, cusName, interRate, LEVEL_C);
+		break;
 	}
 }
 
