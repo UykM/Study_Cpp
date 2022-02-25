@@ -25,6 +25,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Study_Chapter09", "Study_Ch
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Study_Concept_OOP_Project07", "Study_Concept_OOP_Project07\Study_Concept_OOP_Project07.vcxproj", "{D5955F8C-BAB2-48F1-8D57-1BBAB0765252}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Study_Chapter10", "Study_Chapter10\Study_Chapter10.vcxproj", "{A87DB20F-4989-4AB0-8714-C881891D4A6C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -121,6 +123,14 @@ Global
 		{D5955F8C-BAB2-48F1-8D57-1BBAB0765252}.Release|x64.Build.0 = Release|x64
 		{D5955F8C-BAB2-48F1-8D57-1BBAB0765252}.Release|x86.ActiveCfg = Release|Win32
 		{D5955F8C-BAB2-48F1-8D57-1BBAB0765252}.Release|x86.Build.0 = Release|Win32
+		{A87DB20F-4989-4AB0-8714-C881891D4A6C}.Debug|x64.ActiveCfg = Debug|x64
+		{A87DB20F-4989-4AB0-8714-C881891D4A6C}.Debug|x64.Build.0 = Debug|x64
+		{A87DB20F-4989-4AB0-8714-C881891D4A6C}.Debug|x86.ActiveCfg = Debug|Win32
+		{A87DB20F-4989-4AB0-8714-C881891D4A6C}.Debug|x86.Build.0 = Debug|Win32
+		{A87DB20F-4989-4AB0-8714-C881891D4A6C}.Release|x64.ActiveCfg = Release|x64
+		{A87DB20F-4989-4AB0-8714-C881891D4A6C}.Release|x64.Build.0 = Release|x64
+		{A87DB20F-4989-4AB0-8714-C881891D4A6C}.Release|x86.ActiveCfg = Release|Win32
+		{A87DB20F-4989-4AB0-8714-C881891D4A6C}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
