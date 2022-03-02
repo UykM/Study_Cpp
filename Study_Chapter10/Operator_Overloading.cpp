@@ -91,3 +91,111 @@ int main(void)
 3) 매개변수의 디폴트 값 설정이 불가능
 4) 연산자의 순수 기능까지 뺴앗을 수 없음
 */
+
+
+// 단항 연산자의 오버로딩
+// 대표적으로, 증가 연산자(++)와 감소 연산자(--)가 있음.
+// 이항 연산자와의 큰 차이점은 피연산자의 개수
+/* 추가 - 후위증가, 후위감소의 형태의 오버로딩
+#include <iotream>
+using namespace std;
+
+class Point
+{
+private:
+	int xpos, ypos;
+public:
+	Point(int x = 0, int y = 0) : xpos(x), ypos(y)
+	{ }
+	void ShowPosition() const
+	{
+		cout << '[' << xpos << ", " << ypos << ']' << endl;
+	}
+	Point& operator++()		// 멤버함수의 형태로 오버로딩
+	{
+		xpos += 1;
+		ypos += 1;
+		return *this;		// 반환형이 참조형이기 때문에, 객체 자신을 참조할 수 있는 '참조 값'이 반환됨.
+	}
+	const Point operator++(int)		// 후위증가 - 반환형이 const
+	{
+		const Point retobj(xpos, ypos);		// const Point retobj(*this);	
+											// 반환의 대상이 되는 이 객체의 const 선언유무는 객체의 반환에 아무런 영향 X
+											// 함수 내에서 임시객체 retobj의 변경을 막겠다는 의미
+											// '반환형의 const 선언'으로 값의 변경을 허용하지 않는 const 객체(상수 객체)
+		xpos+=1;
+		ypos+=1;
+		return retobj;
+	}
+	friend Point& operator--(Point& ref);
+	friend const Point operator--(Point& ref, int);
+};
+
+Point& operator--(Point& ref)		// 전역함수의 형태로 오버로딩
+{
+	ref.xpos -= 1;
+	ref.ypos -= 1;
+	return ref;
+}
+
+const Point operator--(Point &ref, int)		// 후위감소 - 반환형이 const
+{
+	const Point retobj(ref);	// 함수 내에서 임시객체 retobj의 변경을 막겠다는 의미
+								// 반환의 대상이 되는 이 객체의 const 선언유무는 객체의 반환에 아무런 영향 X
+								// '반환형의 const 선언'으로 값의 변경을 허용하지 않는 const 객체(상수 객체)
+	ref.xpos-=1;
+	ref.ypos-=1;
+	return retobj;
+}
+
+int main(void)
+{
+	Point pos(3, 5);
+	++pos;		// pos.operator++(); 로 해석
+	pos.ShowPosition();
+	--pos;		// operator--(pos); 로 해석
+	pos.ShowPosition();
+
+	Point cpy;
+	cpy = pos--;
+	cpy.ShowPosition();		// [3, 5]
+	pos.ShowPosition();		// [2, 4]
+
+	cpy = pos++;
+	cpy.ShowPosition();		// [2, 4]
+	pos.ShowPosition();		// [3, 5]
+
+	++(++pos);			// ++(pos.operator++());
+						// ++(pos의 참조 값);
+						// (pos의 참조 값).operator++();
+	pos.ShowPosition();
+	--(--pos);			// --(operator--(pos));
+						// --(pos의 참조 값);
+						// operator--(pos의 참조 값);
+	pos.ShowPosition();
+	return 0;
+}
+
+
+// 두 const 함수의 임시 객체를 대상으로는 const로 선언되지 않은 멤버함수의 호출이 불가능!
+int main(void)
+{
+	Point pos(3, 5);
+	(pos++)++;		// 컴파일 Error!	// (Point형 const 임시객체)++;
+										// (Point형 const 임시객체).operator++();	: operator++(int)의 호출
+										// operator++ 멤버함수는 const로 선언된 함수가 아님.
+
+	(pos--)--;		// 컴파일 Error!	// (Point형 const 임시객체)--;
+										// operator--(Point형 const 임시객체);	   : operator--(Point &ref, int)의 호출
+										// 전역함수 operator--(Point &ref, int) 에서 매개변수로 선언된 참조자 &ref가 const로 선언되지 않음.
+	...
+}
+
+// C++ 연산특성
+int main(void)
+{
+	int num = 100;
+	++(++num);		// 컴파일 OK!
+	(num++)++;		// 컴파일 Error!
+}
+*/
