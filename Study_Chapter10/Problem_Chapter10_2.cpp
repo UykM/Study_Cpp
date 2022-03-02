@@ -12,6 +12,14 @@ public:
 	{
 		cout << '[' << xpos << ", " << ypos << ']' << endl;
 	}
+	/*
+	Point& operator-(Point& ref)
+	{
+		xpos = -ref.xpos;
+		ypos = -ref.ypos;
+		return *this;
+	}
+	*/
 	Point operator- ()
 	{
 		Point pos(-xpos, -ypos);
@@ -32,6 +40,11 @@ int main(void)
 	pos1.ShowPosition();
 	Point pos2 = -pos1;
 	pos2.ShowPosition();
+	/* Point &operator-(Point &ref) 로 오버로딩한 경우
+	Point pos2;
+	pos1.ShowPosition();
+	(pos2 - pos1).ShowPosition();
+	*/
 	(~pos2).ShowPosition();
 	pos2.ShowPosition();
 	return 0;
