@@ -27,5 +27,8 @@
     <ClCompile Include="Problem_Chapter10_2.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="OstreamOverloading.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

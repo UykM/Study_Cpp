@@ -131,7 +131,7 @@ public:
 	friend ostream& operator << (ostream& os, const Point& pos);
 };
 
-ostream& operator<<(ostream& os, const Point& pos)
+ostream& operator<<(ostream& os, const Point& pos)		// 입출력 연산자 오버로딩
 {
 	os << '[' << pos.xpos << ", " << pos.ypos << ']' << endl;
 	return os;

@@ -27,5 +27,8 @@
     <ClCompile Include="ArrayOverloading.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="Other_OperatorOverloading.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
