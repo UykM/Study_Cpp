@@ -122,7 +122,8 @@ int main(void)
 
 /* static 멤버함수 - static 멤버변수의 특성과 동일
 - 선언된 클래스의 모든 객체가 공유
-- pulbic 으로 선언되면, 클래스의 이름을 이용해서 호출 가능
+- pulbic 으로 선언되면, 객체를 생성하지 않고 클래스의 이름을 이용해서 호출 가능	 (Study_Chapter11 - NewDeleteOverloading.cpp 참고)
+- static 멤버 변수밖에 사용할 수 없음.
 
 ☆ 객체의 멤버로 존재 X
 class SoSimple
