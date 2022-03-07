@@ -41,6 +41,8 @@ int main(void)
 // 위와 같은 클래스 정의를 통해서 배열접근의 안정성을 보장받을 수 있음.
 */
 
+
+// 배열은 저장소의 일종이고, 저장소에 저장된 데이터는 '유일성'이 보장되어야 하기 때문에,
 // 다음과 같이 복사 생성자와 대입 연산자를 private으로 선언해서, 복사 또는 대입을 원천적으로 막아 좀더 안전성을 높일 수 있음.
 /*
 class BoundCheckIntArray
@@ -204,7 +206,7 @@ ostream& operator<<(ostream& os, const Point& pos)
 	return os;
 }
 
-typedef Point* POINT_PTR;	// Point 포인터 형을 의미하는 POINT_PTR을 정의
+typedef Point* POINT_PTR;		// Point 포인터 형을 의미하는 POINT_PTR을 정의
 
 class BoundCheckIntArray
 {
