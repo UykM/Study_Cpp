@@ -43,12 +43,12 @@ int main(void)
 
 
 // 배열은 저장소의 일종이고, 저장소에 저장된 데이터는 '유일성'이 보장되어야 하기 때문에,
-// 다음과 같이 복사 생성자와 대입 연산자를 private으로 선언해서, 복사 또는 대입을 원천적으로 막아 좀더 안전성을 높일 수 있음.
+// 다음과 같이 복사 생성자와 대입 연산자를 private로 선언해서, 복사 또는 대입을 원천적으로 막아 좀더 안전성을 높일 수 있음.
 /*
 class BoundCheckIntArray
 {
 private:
-	int* arr;
+	int* arr; 
 	int arrlen;
 	BoundCheckIntArray(const BoundCheckIntArray& arr) { }
 	BoundCheckIntArray& operator=(const BoundCheckIntArray& arr) { }
@@ -139,15 +139,15 @@ ostream& operator<<(ostream& os, const Point& pos)		// 입출력 연산자 오버로딩
 	return os;
 }
 
-class BoundCheckIntArray
+class BoundCheckPointArray
 {
 private:
 	Point* arr;
 	int arrlen;
-	BoundCheckIntArray(const BoundCheckIntArray& arr) { }
-	BoundCheckIntArray& operator=(const BoundCheckIntArray& arr) { }
+	BoundCheckPointArray(const BoundCheckIntArray& arr) { }
+	BoundCheckPointArray& operator=(const BoundCheckIntArray& arr) { }
 public:
-	BoundCheckIntArray(int len) : arrlen(len)
+	BoundCheckPointArray(int len) : arrlen(len)
 	{
 		arr = new Point[len];
 	}
@@ -169,14 +169,14 @@ public:
 		return arr[idx];
 	}
 	int GetArrLen() const { return arrlen; }
-	~BoundCheckIntArray() { delete[]arr; }
+	~BoundCheckPointArray() { delete[]arr; }
 };
 
 int main(void)
 {
-	BoundCheckIntArray arr(3);
+	BoundCheckPointArray arr(3);
 	arr[0] = Point(3, 4);
-	arr[1]= Point(5, 6);
+	arr[1] = Point(5, 6);
 	arr[2] = Point(7, 8);
 
 	for (int i = 0; i << arr.GetArrLen(); i++)
@@ -208,15 +208,15 @@ ostream& operator<<(ostream& os, const Point& pos)
 
 typedef Point* POINT_PTR;		// Point 포인터 형을 의미하는 POINT_PTR을 정의
 
-class BoundCheckIntArray
+class BoundCheckPointPtrArray
 {
 private:
 	POINT_PTR* arr;
 	int arrlen;
-	BoundCheckIntArray(const BoundCheckIntArray& arr) { }
-	BoundCheckIntArray& operator=(const BoundCheckIntArray& arr) { }
+	BoundCheckPointPtrArray(const BoundCheckIntArray& arr) { }
+	BoundCheckPointPtrArray& operator=(const BoundCheckIntArray& arr) { }
 public:
-	BoundCheckIntArray(int len) : arrlen(len)
+	BoundCheckPointPtrArray(int len) : arrlen(len)
 	{
 		arr = new POINT_PTR[len];
 	}
@@ -238,12 +238,12 @@ public:
 		return arr[idx];
 	}
 	int GetArrLen() const { return arrlen; }
-	~BoundCheckIntArray() { delete[]arr; }
+	~BoundCheckPointPtrArray() { delete[]arr; }
 };
 
 int main(void)
 {
-	BoundCheckIntArray arr(3);
+	BoundCheckPointPtrArray arr(3);
 	arr[0] = new Point(3, 4);	// 이렇게 객체의 주소 값을 저장할 경우, 깊은 복사냐 얕은 복사냐 하는 문제는 신경 X
 	arr[1] = new Point(5, 6);	
 	arr[2] = new Point(7, 8);

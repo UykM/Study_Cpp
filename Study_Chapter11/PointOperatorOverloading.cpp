@@ -113,6 +113,8 @@ adder(2, 4);
 
 
 */
+
+/*
 #include <iostream>
 using namespace std;
 
@@ -161,3 +163,4 @@ int main(void)
 	cout << adder(Point(3, 4), Point(7, 9));
 	return 0;
 }
+*/
