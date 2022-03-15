@@ -126,8 +126,7 @@ void AccountHandler::WithdrawMoney(void)
 	cout << "존재하지 않는 계좌입니다." << '\n' << endl;
 }
 
-AccountHandler::AccountHandler() : accNum(0)
-{ }
+AccountHandler::AccountHandler() : accNum(0) {}
 
 void AccountHandler::ShowAccount(void) const
 {

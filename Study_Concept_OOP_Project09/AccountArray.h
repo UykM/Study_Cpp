@@ -1,4 +1,5 @@
 #pragma once
+/* ªË¡¶
 #include "Account.h"
 
 typedef Account* ACCOUNT_PTR;
@@ -17,3 +18,4 @@ public:
 	int GetArrLen() const;
 	~BoundCheckAccountPtrArray();
 };
+*/

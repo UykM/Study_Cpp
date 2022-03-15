@@ -1,11 +1,11 @@
 #pragma once
 #include "Account.h"
-#include "AccountArray.h"
+#include "BoundCheckArray.h"
 
 class AccountHandler	// 컨트롤 클래스
 {
 private:
-	BoundCheckAccountPtrArray accArr;	// 변경된 문장
+	BoundCheckArray<Account*> accArr;	// 변경된 문장
 	int accNum;				// 저장된 account의 수
 public:
 	AccountHandler();

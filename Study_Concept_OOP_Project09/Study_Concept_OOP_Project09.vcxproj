@@ -141,17 +141,23 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Account.cpp" />
-    <ClCompile Include="AccountArray.cpp" />
+    <ClCompile Include="AccountArray.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="AccountHandler.cpp" />
     <ClCompile Include="BankingSystemMain.cpp" />
     <ClCompile Include="OOP_Project09_Details.cpp" />
+    <ClCompile Include="OOP_Project10_Details.cpp" />
     <ClCompile Include="String.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Account.h" />
-    <ClInclude Include="AccountArray.h" />
+    <ClInclude Include="AccountArray.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClInclude>
     <ClInclude Include="AccountHandler.h" />
     <ClInclude Include="BankingCommonDecl.h" />
+    <ClInclude Include="BoundCheckArray.h" />
     <ClInclude Include="CreditAccount.h" />
     <ClInclude Include="NormalAccount.h" />
     <ClInclude Include="String.h" />

@@ -1,3 +1,4 @@
+/* ªË¡¶
 #include "BankingCommonDecl.h"
 #include "AccountArray.h"
 
@@ -35,3 +36,4 @@ BoundCheckAccountPtrArray::~BoundCheckAccountPtrArray()
 {
 	delete[]arr;
 }
+*/
