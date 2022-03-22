@@ -85,19 +85,32 @@ void AccountHandler::DepositMoney(void)
 	cout << "[입   금]" << endl;
 	cout << "계좌ID: ";
 	cin >> ID;
-	cout << "입금액: ";
-	cin >> plusMoney;
-
-	for (int i = 0; i < accNum; i++)
+	
+	while (true)
 	{
-		if (accArr[i]->GetAccID() == ID)
+		cout << "입금액: ";
+		cin >> plusMoney;
+		
+		try
 		{
-			accArr[i]->Deposit(plusMoney);
-			cout << "입금 완료" << '\n' << endl;
+			for (int i = 0; i < accNum; i++)
+			{
+				if (accArr[i]->GetAccID() == ID)
+				{
+					accArr[i]->Deposit(plusMoney);
+					cout << "입금 완료" << '\n' << endl;
+					return;
+				}
+			}
+			cout << "존재하지 않는 계좌입니다." << '\n' << endl;
 			return;
 		}
+		catch (MinusException& expt)
+		{
+			expt.ShowExceptionInfo();
+			cout << "입금액만 재입력하세요." << endl;
+		}
 	}
-	cout << "존재하지 않는 계좌입니다." << '\n' << endl;
 }
 
 void AccountHandler::WithdrawMoney(void)
@@ -108,22 +121,38 @@ void AccountHandler::WithdrawMoney(void)
 	cout << "[출   금]" << endl;
 	cout << "계좌ID: ";
 	cin >> myID;
-	cout << "출금액: ";
-	cin >> minusMoney;
+	
 
-	for (int i = 0; i < accNum; i++)
+	while (true)
 	{
-		if (accArr[i]->GetAccID() == myID)
+		cout << "출금액: ";
+		cin >> minusMoney;
+
+		try
 		{
-			if (accArr[i]->Withdraw(minusMoney) == 0)
+			for (int i = 0; i < accNum; i++)
 			{
-				cout << "잔액 부족" << '\n' << endl;
-				return;
+				if (accArr[i]->GetAccID() == myID)
+				{
+					if (accArr[i]->Withdraw(minusMoney) == 0)
+					{
+						cout << "잔액 부족" << '\n' << endl;
+						return;
+					}
+					cout << "출금 완료" << '\n' << endl;
+				}
 			}
-			cout << "출금 완료" << '\n' << endl;
+			cout << "존재하지 않는 계좌입니다." << '\n' << endl;
+			return;
+		}
+		catch (MinusException& expt)
+		{
+			expt.ShowExceptionInfo();
+			cout << "출금액만 재입력하세요." << endl;
 		}
 	}
-	cout << "존재하지 않는 계좌입니다." << '\n' << endl;
+	
+	
 }
 
 AccountHandler::AccountHandler() : accNum(0) {}

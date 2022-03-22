@@ -1,5 +1,6 @@
 #include "BankingCommonDecl.h"
 #include "Account.h"
+#include "AccountException.h"
 
 Account::Account(int _accID, int _money, String _cusName)
 	: accID(_accID), money(_money)
@@ -36,15 +37,19 @@ int Account::GetAccID() const
 
 void Account::Deposit(int _money)
 {
+	if (_money < 0)
+		throw MinusException(_money);
+
 	money += _money;
 }
 
 int Account::Withdraw(int _money)
 {
+	if (_money < 0)
+		throw MinusException(_money);
+
 	if (money < _money)
-	{
-		return 0;
-	}
+		throw InsuffException(money, _money);
 
 	money -= _money;
 	return money;

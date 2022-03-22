@@ -13,6 +13,9 @@ public:
 
 	virtual void Deposit(int money)
 	{
+		if (money < 0)
+			throw MinusException(money);
+		
 		NormalAccount::Deposit(money);		// 원금과 이자추가
 		Account::Deposit(money * (specialRate / 100.0));		// 특별이자추가
 	}
