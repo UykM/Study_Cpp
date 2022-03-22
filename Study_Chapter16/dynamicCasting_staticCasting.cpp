@@ -58,3 +58,126 @@ int main(void)
 
 	return 0;
 }
+
+/*	dynamic_cast 연산자도 기초 클래스의 포인터 및 참조형 데이터를 유도 클래스의 포인터 및 참조형으로의 형 변환을 허용하는 경우
+* ->  기초 클래스가 'Polymorphic 클래스' 인 경우 : Polymorphic 클래스란, 하나 이상의 가상합수를 지니는 클래스
+*/
+
+#include <iostream>
+using namespace std;
+
+class SoSimple		// Polymorphic 클래스
+{
+public:
+	virtual void ShowSimpleInfo()
+	{
+		cout << "SoSimple Base Class" << endl;
+	}
+};
+
+class SoComplex : public SoSimple
+{
+public:
+	void ShowSimpleInfo()
+	{
+		cout << "SoComplex Derived Class" << endl;
+	}
+};
+
+int main(void)
+{
+	SoSimple* simPtr = new SoComplex;		// 
+	SoComplex* comPtr = dynamic_cast<SoComplex*>(simPtr);	// 이처럼 기초 클래스인 SoSimple이 Polymorphic 클래스이므로, 
+															// dynamic_cast 연산자로 기초 클래스인 SoSimple형 포인터 변수 simPtr을 유도 클래스인 SoComplex형 포인터로 형 변환 가능
+															
+															// dynamic_cast 연산자와 static_cast 연산자의 차이점이 드러나는 부분
+															// 또한, Sosimple형 포인터 변수가 실제로 가리키는 객체는 SoComplex 객체임.
+															// 즉, 포인터 변수 simPtr이 가리키는 객체를 SoComplex형 포인터 변수 comPtr이 함께 가리켜도 문제없기 떄문에 dynamic_cast로 형 변환이 가능한 것!
+	comPtr->ShowSimpleInfo();
+	return 0;														
+}
+
+// 유도 클래스의 포인터 및 참조형으로의 형 변환을 시도할 때, 사용할 수 있는 두 연산자
+// dynamic_cast
+// static_cast
+// 두 연산자의 차이점은 결과에 있음.
+/*
+#include <iostream>
+using namespace std;
+
+class SoSimple		// Polymorphic 클래스
+{
+public:
+	virtual void ShowSimpleInfo()
+	{
+		cout << "SoSimple Base Class" << endl;
+	}
+};
+
+class SoComplex : public SoSimple
+{
+public:
+	void ShowSimpleInfo()
+	{
+		cout << "SoComplex Derived Class" << endl;
+	}
+};
+
+int main(void)
+{
+	SoSimple* simPtr = new SoSimple;						// 전 예제와 달리 SoSimple형 포인터 변수 simPtr이 실제로 가리키는 객체가 SoSimple 객체임.
+	SoComplex* comPtr = dynamic_cast<SoComplex*>(simPtr);	// 따라서, 포인터 변수 simPtr이 가리키는 대상을 SoComplex형 포인터 변수 comPtr이 가리킬 수 없는 상황임. 
+	if(comPtr == NULL)										// 이러한 경우엔 형 변환 결과로 NULL 포인터가 반환됨.
+		cout << "형 변환 실패" << endl;		
+	else
+		comPtr->ShowSimpleInfo();
+	return 0;
+}
+
+//	이러한 예제를 통해 알 수 있는 사실
+->	dynamic_cast 연산자는 안정적인 형 변환을 보장!
+->	그렇기 떄문에, 실행속도는 늦어지지만, 그만큼 안정적인 형 변환이 가능함.
+
+반대로 static_cast 연산자는 안정성을 보장 X!
+*/
+
+/*	bast_cast 예외 : dynamic_cast 연산자를 이용한 형 변환의 과정에서 발생할 수 있는 예외
+class SoSimple
+{
+public:
+	virtual void ShowSimpleInfo()
+	{
+		cout << "SoSimple Base Class" << endl;
+	}
+};
+
+class SoComplex : public SoSimple
+{
+public:
+	void SHowSimpleInfo()
+	{
+		cout << "SoComplex Derived Class" << endl;
+	}
+};
+
+int main(void)
+{
+	SoSimple simObj;
+	SoSimple& ref = simObj;		// 참조자 ref가 실제 참조하는 대상 => SoSimple 객체
+
+	try
+	{
+		SoComplex& comRef = dynamic_cast<SoComplex&>(ref);		// 따라서 SoComplex 참조형으로의 형 변환은 안전 X, 그리고 참조자를 대상으로는 NULL 반환도 X
+																// 이러한 상황에선 bad_cast 예외 발생
+																// 이처럼 참조형을 대상으로 dynamic_cast 연산을 진행할 경우엔 
+																// bad_cast 예외가 발생할 수 있기 때문에 반드시 이에 대한 예외처리를 해야함!
+		comRef.ShowSimpleInfo();
+	}
+	catch (bad_cast expt)
+	{
+		cout << expt.what() << endl;		// what 함수 : 예외의 원인을 문자열의 형태로 반환
+	}
+	return 0;
+}
+*/
+
