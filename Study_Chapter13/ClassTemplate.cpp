@@ -22,8 +22,8 @@ public:
 
 /*
 // 클래스 템플릿
-template <typename T>
-class Point
+template <typename T>		// template <typename T = int>	 
+class Point			
 {
 private:
 	T xpos, ypos;
@@ -40,6 +40,8 @@ int main(void)
 {
 	Point<int> pos1(3, 4);		// 템플릿 함수를 호출할 때처럼 자료형 정보를 생략하는 것은 불가능!
 								// 클래스 템플릿 기반의 객체생성에는 반드시 자료형 정보를 명시해야 함.
+								// 템플릿 인수 T에 int형으로 디폴트 값을 선언한 경우엔,
+								// Point<> obj1(n1, n2); 처럼 자료형 정보를 생략했을때 int형으로 인식함.
 	pos1.ShowPosition();
 
 	Point<double> pos2(2.4, 3.6);
