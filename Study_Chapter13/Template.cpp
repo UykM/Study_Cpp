@@ -7,7 +7,10 @@ T 함수이름(T num1, T num2)		// T는 자료형을 결정짓지 않겠다는 의미로 사용
 	return num1+num2;
 }
 
+★ Point! 
+함수 템플릿은 완성된 함수가 아니라 필요한 함수들을 뽑아내기 위한 함수의 틀이라고 기억하기
 */
+
 /*
 #include <iostream>
 using namespace std;
